@@ -1,0 +1,303 @@
+1) Create a script that, when run, will display the following environment variables to the console:
+
+USER
+HOME
+HISTCONTROL
+TERM
+
+-->
+#! /bin/bash
+echo "Hello world"
+echo " $USER "
+echo " $HOME "
+echo " $HISTCONTROL "
+echo " $TERM " 
+
+2)Write a script that sets FOUR variables:
+
+MYUSERNAME
+MYPASSWORD
+STARTOFSCRIPT
+ENDOFSCRIPT
+
+Populate the first two with some default value and use command redirection to set the third and fourth value to the date/time of when the script was started and 
+completed. Within the script, be sure to display the values to the terminal when run.
+
+-->
+#! /bin/bash
+read -p 'MYUSERNAME ='
+echo $MYUSERNAME
+read -sp 'MYPASSWORD'
+echo $MYPASSWORD
+echo
+st= "$(date)"
+echo "STARTOFSCRIPT : "$st
+echo "Enter the desired script below, after whose u want to know the endtime. It can be a text or any shell script"
+echo
+et= "$(date)"
+echo "ENDOFSCRIPT : "$et
+
+3)Develop a script that creates, sets and displays two variables to the terminal when run.
+Within this script, add comments to explain what the script is doing, what each variable is and, using inline comments, what each command is doing.
+
+-->
+#! /bin/bash
+var1=10 #creating and initializing the variable 1
+var2=20  #creating and initializing the variable 2
+echo " $var1 is the variable one " #c printing the var1
+echo " $var2 is the variable two " #c printing the var2
+echo "$(( var1 + var2))" #adding 2 variables while printing the o/p
+
+4)Create a simple script that does the following:
+
+Echo a full sentence to the terminal
+Echo a different full sentence, but redirect it to /dev/null
+
+Run and display the results and make sure the statements appear where intended.
+-->
+#! /bin/bash
+echo"write any sentence"
+echo"write another sentences that needs to be redirected">>/devo/null
+
+5)Write a script that runs three commands:
+Evaluate an arithmetic expression
+Attempt to remove a file that does not exist in the current directory
+Evaluate another arithmetic expression
+Immediately after each command, echo the exit status of that command to the terminal using the appropriate variable to show success and failure exit codes.
+-->
+#!/bin/bash
+a=10
+b=44
+echo "$b"
+echo $?
+#
+rm rem.txt		#rem.txt is a file that does not exist in the current directory
+echo $?
+#
+echo "$a"
+echo $?
+
+6)Write a script that evaluates and displays the following arithmetic operations:
+Add two numbers
+Add two numbers and multiply by a third, do not group anything 
+Add two numbers, grouped (changing order of precedence) and multiply by a third
+Keep in mind special characters and/or escape characters as needed.
+-->
+#!/bin/bash
+num1=10
+num2=20
+
+sum=$(($num1 + $num2))
+echo "sum of two numbers is : $sum"
+num3=2
+mul=$(expr $num1+ $num2 \* $num3)
+echo "mul of third numbers is : $mul"
+
+7)Write a script that will use command substitution to dynamically set variable values:
+TODAYSDATE - should contain date/time stamp when executed
+USERFILES - the results of a find run on the /home directory to list all files owned by 'user' account
+Additionally, set two aliases:
+TODAY - should be an alias for the 'date' command
+UFILES - should be an alias to the full command used to set the variable USERFILES above
+Finally, display all variables and alias values when the script is run.
+-->
+#!/bin/bash
+
+echo "Enter the date"
+read date
+echo "$date"
+
+8)Create a script that interacts with the user. You will want to prompt the user to enter the following information
+ (which you will capture and place into the following variables):
+FIRSTNAME
+LASTNAME
+USERAGE
+Greet the user with their name and current age displayed and then calculate and display their age in 10 years.
+-->
+#!/bin/bash
+echo "enter the name"
+read FIRSTNAME 
+echo " enter the lastname "
+read LASTNAME 
+echo " enter the age "
+read USERAGE
+echo " My name is $FIRSTNAME $LASTNAME  and I am $USERAGE old"
+
+9)Write a script intended to iterate through an array called SERVERLIST containing at least four values (server names).
+ Display all four values to the terminal when run.
+-->
+#!/ban/bash
+#SERVERLIST
+ SERVERLIST= ('abc' 'xyz'  'pqr')
+echo "${SERVERLIST[0]}"
+echo "${SERVERLIST[1]}"
+echo "${SERVERLIST[2]}"
+echo "${SERVERLIST[@]}"
+
+10)Create a script that, when run, will accept two command line values as arguments. These arguments should be a username and password and assigned to two variables in the script named appropriately. 
+Finally, echo those values out to the terminal when run to indicate they were read and assigned as expected.
+-->
+#!/ban/bash
+username=$1
+password=$2
+echo "username : $username"
+echo "password : $password"
+
+11)Create a script that interacts with the user. Prompt them to guess a secret number between 1 and 5. Read the guess from the terminal and assign it to a variable. Using the 'if' statement from the course, test that value to determine if they guessed the right number (you choose the correct value). 
+If they do, display a success message, otherwise do nothing.
+-->
+#!/ban/bash
+echo "ENter the number brtween 1-5"
+num=$1
+if [ "$num" -ge 1 ] && [ "$num" -le 5 ]
+then
+  echo "number is present in the range"
+fi
+
+12)Write a script that will prompt the user to enter a number between 1 and 3. Capture that number in a variable and then test that variable.
+ Be sure to display the variable and it's value as appropriate within an if/then/else statement where the final statement will display if they did not enter a number between 1 and 3 telling them they failed to follow instructions.
+ Redirect errors from each of the tests to /dev/null (to prevent script errors from showing if text is entered for example).
+-->
+#!/ban/bash
+echo "ENter the number brtween 1-3"
+num=$1
+if [ "$num" -ge 1 ] && [ "$num" -le 3 ]
+then
+  echo "$num is present in the range"
+else
+  echo "failed to follow instructions"
+fi
+
+13)Write a script that assigns a variable that contains a list of all shell scripts (*.sh) in the current directory (command redirection). Using the 'for'statement from the course, iterate through that list of files and display the filename of each and cat out the contents to the terminal.
+-->
+#!/bin/bash
+list=ls *.sh
+echo "$list"
+for ((i=0: i<5: i++))
+do
+  echo "cat i"
+done
+
+14)Develop a simple three item menu to display on the terminal. Your script, upon display of the menu, should prompt the user to choose one of the three available options. Using the 'case' statement from the course, display three unique messages depending on which number they chose, 
+with a catch all message letting them know if they went outside the bounds of instructions.
+-->
+#!/bin/bash
+echo "Enter the number from 1-3"
+read num
+
+case $num in
+   1) 
+   echo "you choosed $num" ;;
+   2) 
+   echo "you choosed $num" ;;
+   3) 
+   echo "you choosed $num" ;;
+esac
+
+15)Create a script that prompts the user for a number. That number is to be used to display a simple message to the terminal X number of times (where X is the number captured from the user input). The message should include an indication of the number for each count the message is displayed.
+-->
+#!/bin/bash
+echo "Enter any number"
+read num
+echo "$num number of times"
+for (( i=1; i<$num; i++ ))
+do
+  echo "count is $i"
+done
+
+16)Create a simple text file containing a list of super heros (or some names if preferred), use at least four values, one per line in the file.
+Write a bash shell script that then reads that file and displays it line by line on the terminal window.
+-->
+#!/bin/bash
+filename=simple.txt
+while read line; do
+echo $line
+done < $filename
+
+17)Create a simple text file containing a list of names (superheroes) and name it whatever you wish, should contain at least four values, one per line.
+Write a script that will use a file descriptor defined for both reading and writing to that file (pick an appropriate number greater than the system reserved handles as talked about in the course).
+Filtering that file into an appropriate loop, display all values with that file. Finally, once complete, write a message with the time/date stamp to the file and close the descriptor.
+-->
+
+18)Create a simple text file at the command prompt. This file should contain three values - CPU, Memory and Disk space for an imaginary system, all on one line and delimited with a '|' character.
+Write a script to read that file and prompt the user for the delimiter value. Use that delimiter along with the IFS variable and read those delimited values into three appropriately named variables. Finally, display them with labels, one each per line.
+-->
+#!/bin/bash
+while IFS read -r p
+do
+  echo $p
+done < simple.txt
+
+19)We need to create a menu for our users. Display a menu containing three choices AND a choice to allow them to exit. Display that menu and prompt for a choice. Upon choosing the value, it should simply clear the screen and redisplay the menu (loop until the exit choice is given).
+HOWEVER, we need to be sure that the end user cannot use CTL-C, CTL-Z or a KILL command to terminate the application. Add a 'trap' in the script to capture those attempts and provide instructions on how to exit the script using the menu choice instead.
+-->
+#!/bin/bash
+function one() {
+ echo "1.display content 2.clear 3.exit"
+ read choice
+ case $choice in
+   1)
+   echo "hello world" ;;
+   2)
+   echo "Clearing the screen"
+   3)
+   break ;;
+}
+
+while read p
+do
+  one
+done
+
+20)Create a script that accepts a command line parameter intended to be the name of a directory. With the script, attempt to change to the indicated directory, be sure to redirect errors to /dev/null on the command as we will be providing our own messaging.
+Test the results of the command to change directories. If it was successful, indicate success and display the contents of the directory. If it was not successful, indicate we cannot change directories and exit to the terminal with a custom exit code (less than 200).
+-->
+#!/bin/bash
+echo "Enter the name of directory"
+read directory
+cd $directory > /dev/nu
+num<echo $?
+if num
+then
+  echo "directory is present"
+else
+  echo "directory not present"
+fi
+
+21)Create a simple script containing a single function. This function should display a message to clearly indicate it was generated when the function was run. Then, display another message outside the function clearly indicating it was generated outside of it.
+-->
+  #!/bin/bash
+function print_fn{
+	echo "Inside print function"
+}
+echo "before calling print function"
+print_fn
+echo "After calling the print function"
+
+22)Create a script to demonstrate the visibility of variables and when they are available within a script and its functions. Define a global variable, a function that defines a local variable and then display both BEFORE calling the function, call the function, then display both AFTER calling the function.
+-->
+#!/bin/bash
+g_var=10
+function var_demo {
+  echo "Inside variable function"
+  l_var=20
+  echo "$l_var"
+}
+echo "Before calling var function"
+echo "$g_var"
+echo "$l_var"
+
+var_demo
+
+echo "After calling var function"
+echo " global variable is $g_var"
+echo "local variable if $l_var"
+
+23)Write a script that takes a single command line parameter intended to be the user's first name. Prompt the user for their age and read that into a variable. Using the appropriate method to make that command line parameter visible to a function, pass the age captured to the function and display a message to the user addressing them by name and confirming their age, add a calculation of their age in number of days.
+-->
+#!/bin/bash
+
+
+
+
+
